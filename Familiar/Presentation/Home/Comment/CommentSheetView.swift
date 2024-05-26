@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ComentSheetView: View {
     
+    @Binding var userProfileImage : UIImage
+    @State var userName: String = "고먐미"
+    @State var comment: String = ""
     @State var comentWriteZone : String = ""
     @State var commentList: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @Environment(\.presentationMode) var presentationMode
@@ -16,75 +19,104 @@ struct ComentSheetView: View {
     var body: some View {
         
         VStack(spacing: 0) {
-            
-            VStack(spacing: 0) {
-                HStack(alignment: .center) {
-                    Color.white
-                        .frame(width: 18, height: 18)
-                        .padding(12)
-                    Spacer()
+            ZStack(alignment: .top){
+                VStack(spacing: 7) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .foregroundColor(Constants.Colors.grayScale800.opacity(0.3))
+                        .frame(width: 36, height: 5)
+                        .padding(.top, 4)
+                        .padding(.bottom, 5)
                     Text("댓글")
-                        .font(.system(size: 24, weight: .medium))
+                        .font(.custom("pretendard", size: 18))
+                        .bold()
+                }
+                
+                HStack {
                     Spacer()
                     Button {
                         // Sheet 닫기 Action
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: "xmark")
-                            .resizable()
-                            .foregroundColor(Constants.Colors.grayScale700)
-                            .frame(width: 18, height: 18)
-                            .padding(12)
-                            .background(Constants.Colors.grayScale200)
+                            .foregroundColor(Constants.Colors.grayScale800.opacity(0.6))
+                            .font(.body.bold())
+                            .frame(width: 30, height: 30)
+                            .background(Constants.Colors.grayScale500.opacity(0.1))
                             .clipShape(.circle)
                     }
+                    .padding(.top, 17)
                 }
-                .padding(20)
                 
-                List {
-                    ForEach(commentList, id: \.self) { _ in
-                        ComentListView(
-                            userProfileImage: .constant(UIImage(named: "cat")!),
-                            userNickName: .constant("해피")
-                        )
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                    }
-                    .onDelete(perform: delete)
+            } // : ZStack
+            
+            .padding(.horizontal, 11)
+            .padding(.bottom, 20)
+            
+            List {
+                ForEach(commentList, id: \.self) { _ in
+                    ComentListView(
+                        userProfileImage: self.$userProfileImage,
+                        userNickName: .constant("해피")
+                    )
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
                 }
-                .listStyle(.plain)
-                .environment(\.locale, Locale(identifier: "ko_kr"))
-                
-                HStack (spacing: 20) {
-                    
-                    Constants.CustomTextFieldWithBottomLine($comentWriteZone, placeholder: "댓글을  작성해주세요.")
-                    
-                    // 작성버튼
-                    
-                    //            Button {
-                    //
-                    //            } label: {
-                    //                Text("작성")
-                    //                    .font(.headline).bold()
-                    //                    .foregroundColor(.white)
-                    //                    .frame(width: 60, height: 50)
-                    //                    .background(Constants.main300)
-                    //                    .cornerRadius(10)
-                    //                    .padding(.trailing,50)
-                    //            }
-                    
-                } // : HStack
-                .padding(.horizontal)
+                .onDelete(perform: delete)
             }
+            .listStyle(.plain)
+            .environment(\.locale, Locale(identifier: "ko_kr"))
+            
+            commentInputView
         }
     }
     
+    private var commentInputView: some View {
+        HStack(spacing: 12) {
+            Image(uiImage: self.userProfileImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 48, height: 48)
+                .cornerRadius(24)
+            HStack {
+                TextField("\(userName)님 글에 댓글 달기...",
+                          text: $comment)
+                .font(.system(size: 14))
+                Button {
+                   createComment()
+                } label: {
+                    Image(systemName: "chevron.up")
+                        .font(.system(size: 14).bold())
+                        .foregroundColor(Constants.Colors.grayScale50)
+                        .frame(width: 24, height: 24)
+                        .background(comment.isEmpty ? Constants.Colors.grayScale800 : Constants.Colors.main200)
+                        .clipShape(Circle())
+                }
+                
+            }
+            .frame(height: 48)
+            .padding(.horizontal, 12)
+            .cornerRadius(32)
+            .overlay(
+                RoundedRectangle(cornerRadius: 32)
+                    .stroke(Constants.Colors.grayScale200, lineWidth: 1)
+            )
+        } // : HStack
+        .padding(.horizontal, 24)
+        .padding(.vertical)
+    }
+                
+    // MARK: - Create Comment
+    func createComment() {
+        
+    }
+
     func delete(indexSet: IndexSet) {
         commentList.remove(atOffsets: indexSet)
     }
-    
 }
 
-#Preview {
-    ComentSheetView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ComentSheetView(userProfileImage: .constant(UIImage(named: "cat")!))
+    }
 }

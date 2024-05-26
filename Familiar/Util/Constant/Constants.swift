@@ -15,6 +15,7 @@ struct Constants {
     
     // MARK: - Color
     enum Colors {
+        static let main50 = Color(red: 250/255, green: 250/255, blue: 255/255)
         static let main100 = Color("Main100")
         static let main200 = Color("Main200")
         static let main300 = Color("Main300")

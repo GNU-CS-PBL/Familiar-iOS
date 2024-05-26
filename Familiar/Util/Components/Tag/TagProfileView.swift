@@ -20,7 +20,7 @@ struct TagProfileView: View {
                 Image(uiImage: tagInfo.image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width:100, height: 100)
+                    .frame(width:96, height: 96)
                     .clipShape(Circle())
                     .padding(.bottom,10)
                     .opacity(tagInfo.isPressProfile ? 0.5 : 1.0)
@@ -28,6 +28,8 @@ struct TagProfileView: View {
                 // 이미지 클릭시 투명도 조절 & 체크 마크 표시
                 
                 if tagInfo.isPressProfile {
+                    Image("check")
+                        .frame(width: 48, height: 48)
 //                    Image(systemName: "checkmark")
 //                        .font(.system(size: 35))
 //                        .bold()

@@ -61,8 +61,9 @@ struct AlarmView: View {
             selectedAlarm = alarmText
         } label: {
             Text("모두 읽기")
+                .font(Font.custom("pretendard", size: 14))
                 .bold()
-                .foregroundColor(Constants.Colors.main400)
+                .foregroundColor(Constants.Colors.main300)
         }
     }
     var backButton: some View {
