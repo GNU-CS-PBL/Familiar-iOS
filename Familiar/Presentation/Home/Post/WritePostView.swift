@@ -21,7 +21,9 @@ struct WritePostView: View {
                         mode.wrappedValue.dismiss()
                     } label: {
                         Text("취소")
-                            .font(.system(size: 16, weight: .medium))
+                            .font(Font.custom("pretendard", size: 16).weight(.semibold))
+//                            .font(.system(size: 16, weight: .medium))
+                        
                             .foregroundColor(Constants.Colors.grayScale800)
                         //                            .padding(.leading,24)
                     }
@@ -32,7 +34,8 @@ struct WritePostView: View {
                         
                     } label: {
                         Text("등록")
-                            .font(.system(size: 16, weight: .semibold))
+//                            .font(.system(size: 16, weight: .semibold))
+                            .font(Font.custom("pretendard", size: 16).weight(.semibold))
                             .foregroundColor(feedWriteZone == "" ? Constants.Colors.grayScale500 : Constants.Colors.main400)
                     }
                     .disabled(feedWriteZone == "")
@@ -44,11 +47,13 @@ struct WritePostView: View {
                 HStack(spacing: 2){
                     
                     Text("본문")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(Font.custom("pretendard", size: 16).weight(.medium))
+                    
                     Text("*")
+                        .font(Font.custom("pretendard", size: 12))
                         .foregroundColor(.red)
                 }
-                .font(.system(size: 22, weight: .medium))
+                .font(Font.custom("pretendard", size: 22).weight(.medium))
                 .padding(.bottom, 12)
                 
                 
@@ -61,8 +66,8 @@ struct WritePostView: View {
                         .padding(.top, 3)
                         .padding(.leading, 10)
                         .frame(minHeight: 400)
-                        .font(.system(size: 18))
-                        .background(Constants.Colors.grayScale200)
+                        .font(Font.custom("pretendard", size: 18))
+//                        .background(Constants.Colors.grayScale200)
                         .cornerRadius(4)
                     
                     if feedWriteZone.isEmpty {
@@ -70,13 +75,14 @@ struct WritePostView: View {
                             .foregroundColor(Constants.Colors.grayScale500)
                             .padding(.leading, 12)
                             .padding(.top, 12)
-                            .font(.system(size: 18))
+                            .font(Font.custom("pretendard", size: 18))
                     }
                 } // : ZStack
                 .padding(.bottom, 24)
+
                 
                 Text("사진 / 영상")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(Font.custom("pretendard", size: 16).weight(.semibold))
                     .padding(.bottom, 12)
                 if images == [] {
                     Button {
@@ -86,7 +92,7 @@ struct WritePostView: View {
                             Spacer()
                         Text("사진 / 영상 추가")
                             .foregroundColor(Constants.Colors.grayScale700)
-                            .font(.system(size: 16, weight: .bold))
+                            .font(Font.custom("pretendard", size: 16).weight(.bold))
                         
                         Spacer()
                     }
@@ -103,7 +109,8 @@ struct WritePostView: View {
                                 Image(systemName: "photo")
                                     .font(.system(size: 20))
                                 Text("사진을 등록하세요!")
-                                    .font(.system(size: 12))
+                                    .font(Font.custom("pretendard", size: 12))
+                                
                             }
                             .frame(width: 160, height: 160)
                             .foregroundColor(Constants.Colors.grayScale500)
@@ -131,7 +138,8 @@ struct WritePostView: View {
                 
                 HStack {
                     Text("태그")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(Font.custom("pretendard", size: 16).weight(.semibold))
+                    
                     Spacer()
                     if tagInfo != [] {
                         Button {
@@ -161,6 +169,7 @@ struct WritePostView: View {
                                 .frame(width: 30, height: 30)
                             
                             Text("구성원 추가 +")
+                                .font(Font.custom("pretendard", size: 16))
                                 .foregroundColor(Constants.Colors.main200)
                             
                             
@@ -244,6 +253,7 @@ func generateContent(in g: GeometryProxy, totalHeight: Binding<CGFloat>) -> some
                 .clipShape(.circle)
             Text(tag.nickName)
                 .foregroundColor(Constants.Colors.grayScale800)
+                .font(Font.custom("pretendard", size: 16))
         }
         .padding([.vertical], 5)
         .padding([.horizontal])

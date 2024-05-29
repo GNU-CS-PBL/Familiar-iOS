@@ -38,6 +38,7 @@ struct AlarmListView: View {
                 
                 Text("\(alarmTime)시간 전")
                     .foregroundColor(Constants.Colors.grayScale400)
+                    .font(Font.custom("pretendard", size: 14))
 //                    .padding(.trailing, 24)
 //                    .padding(.top, 16)
                 

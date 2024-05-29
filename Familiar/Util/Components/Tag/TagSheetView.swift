@@ -96,7 +96,8 @@ struct TagSheetView: View {
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("완료")
-                    .font(.headline).bold()
+//                    .font(.headline).bold()
+                    .font(Font.custom("pretendard", size: 16).weight(.semibold))
                     .padding()
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .foregroundColor(.white)

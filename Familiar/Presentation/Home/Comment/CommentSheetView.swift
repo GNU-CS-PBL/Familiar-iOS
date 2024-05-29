@@ -80,7 +80,8 @@ struct ComentSheetView: View {
             HStack {
                 TextField("\(userName)님 글에 댓글 달기...",
                           text: $comment)
-                .font(.system(size: 14))
+//                .font(.system(size: 14))
+                .font(Font.custom("pretendard", size: 14))
                 Button {
                    createComment()
                 } label: {

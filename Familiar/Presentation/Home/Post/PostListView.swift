@@ -36,11 +36,11 @@ struct PostListView: View {
                         .cornerRadius(14)
                     
                     Text(userNickName)
-                        .font(.system(size: 16))
+                        .font(Font.custom("pretendard", size: 16))
                         .padding(.leading, 16)
                     
                     Text(createdTime)
-                        .font(.system(size: 14))
+                        .font(Font.custom("pretendard", size: 14))
                         .padding(.leading, 8)
                         .foregroundColor(Constants.Colors.grayScale500)
                     

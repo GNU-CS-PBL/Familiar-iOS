@@ -30,14 +30,14 @@ struct ComentListView: View {
                             Text(userNickName)
                                 .font(.system(size: 16, weight: .medium))
                             Text("7시간 전")
-                                .font(.system(size: 16))
+                                .font(Font.custom("pretendard", size: 16))
                                 .foregroundColor(Constants.Colors.grayScale400)
                                 .padding(.leading, 8)
                         }
                         .padding(.bottom, 8)
                         
                         Text("댓글입니다.")
-                            .font(.system(size: 16))
+                            .font(Font.custom("pretendard", size: 16))
                             .padding(.bottom, 12)
                     }
                     .padding(.leading, 22)
@@ -66,6 +66,7 @@ struct ComentListView: View {
                         isShowMenu = false
                     } label: {
                         Text("수정하기")
+                            .font(Font.custom("pretendard", size: 14))
                     }
                     .padding(.vertical, 8)
                     Constants.Colors.grayScale400
@@ -74,6 +75,7 @@ struct ComentListView: View {
                         isShowMenu = false
                     } label: {
                         Text("삭제")
+                            .font(Font.custom("pretendard", size: 14))
                     }
                     .padding(.vertical, 8)
                 }
