@@ -10,18 +10,22 @@ struct TagInfo: Hashable {
 struct TagSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var tagInfo: [TagInfo]
-    @State var tagInfoList: [TagInfo] = [
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 0),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 1),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 2),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 3),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 4),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 5),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 6),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 7),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 8),
-        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 9)
-    ]
+//    @State var tagInfoList: [TagInfo] = [
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 0),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 1),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 2),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 3),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 4),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 5),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 6),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 7),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 8),
+//        .init(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: 9)
+//    ]
+    
+    @State var tagInfoList: [TagInfo] = (0...9).map{
+        TagInfo(image: UIImage(named: "cat")!, nickName: "냥냥이", isPressProfile: false, id: $0)
+    }
     
 
     // 3행 그리드 아이템
@@ -32,94 +36,79 @@ struct TagSheetView: View {
     ]
     
     var body: some View {
-       
-        // sheet 드래그 부분
-        VStack(spacing :.zero) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.white)
-                .frame(height: 30)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 100)
-                        .foregroundColor(.gray)
-                        .frame(width: 50, height: 5)
-                    )
+        VStack(alignment: .center, spacing: 0) {
+            // sheet 드래그 부분
+            ZStack(alignment: .top){
+                VStack(spacing: 7) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .foregroundColor(Constants.Colors.grayScale800.opacity(0.3))
+                        .frame(width: 36, height: 5)
+                        .padding(.top, 4)
+                        .padding(.bottom, 5)
+                    Text("태그 추가")
+                        .font(.custom("pretendard", size: 18))
+//                        .bold()
+                    
+                }
+                HStack {
+                    
+                    
+                    Spacer()
+                    Button {
+                        // Sheet 닫기 Action
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(Constants.Colors.grayScale800.opacity(0.6))
+                            .font(.body.bold())
+                            .frame(width: 30, height: 30)
+                            .background(Constants.Colors.grayScale500.opacity(0.1))
+                            .clipShape(Circle())
+                    }
+                    .padding(.top, 17)
+                }
+                
+            } // : ZStack
+            .padding(.horizontal, -16)
+            .padding(.bottom, 20)
             
-        } // : VStack
-        
-   
-        HStack {
-            
-            Spacer()
-            
-            Text("태그 추가")
-                .font(.title2)
-                .bold()
-                .offset(x:25, y: -15)
-//                .offset(y: -15)
-//
-            
-            Spacer()
-            
+            ScrollView {
+                
+                LazyVGrid(columns: gridLayout) {
+                    ForEach(tagInfoList, id: \.id) { tag in
+                        TagProfileView(tagInfo: tag)
+                            .onTapGesture {
+                                let index = tagInfoList.firstIndex { $0.id == tag.id } ?? 0
+                                tagInfoList[index] = .init(
+                                    image: tag.image,
+                                    nickName: tag.nickName,
+                                    isPressProfile: !tag.isPressProfile,
+                                    id: tag.id
+                                )
+                            }
+                    }
+                }
+            }
             
             
             Button {
-                // Sheet 닫기 Action
+                tagInfo = tagInfoList.filter { $0.isPressProfile == true }
                 presentationMode.wrappedValue.dismiss()
             } label: {
-                Image(systemName: "x.circle.fill")
-                    .foregroundColor(Constants.Colors.grayScale300)
-                    .font(.largeTitle)
-                    .offset(x:20, y: -30)
-                
-
-                   
+                Text("완료")
+//                    .font(.headline).bold()
+                    .font(Font.custom("pretendard", size: 16).weight(.semibold))
+                    .padding()
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .foregroundColor(.white)
+                    .background(tagInfoList.first { $0.isPressProfile == true } == nil ? Constants.Colors.grayScale300 : Constants.Colors.main200)
+                    .cornerRadius(10)
+                //                .padding(.horizontal, 24)
             }
-            .padding(.trailing)
-         
-        } // : HStack
-        .padding(.horizontal)
-        
-        
-        Spacer()
-        
-        ScrollView {
-        
-            LazyVGrid(columns: gridLayout, spacing: 20) {
-                ForEach(tagInfoList, id: \.id) { tag in
-                    TagProfileView(tagInfo: tag)
-                        .onTapGesture {
-                            let index = tagInfoList.firstIndex { $0.id == tag.id } ?? 0
-                            tagInfoList[index] = .init(
-                                image: tag.image,
-                                nickName: tag.nickName,
-                                isPressProfile: !tag.isPressProfile,
-                                id: tag.id
-                            )
-                        }
-                }
-            }
+            .disabled(tagInfoList.first { $0.isPressProfile == true } == nil)
         }
         
-        
-        Button {
-            tagInfo = tagInfoList.filter { $0.isPressProfile == true }
-            presentationMode.wrappedValue.dismiss()
-        } label: {
-            Text("완료")
-                .font(.headline).bold()
-                .padding()
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .foregroundColor(.white)
-                .background(tagInfoList.first { $0.isPressProfile == true } == nil ? Constants.Colors.grayScale300 : Constants.Colors.main300)
-                .cornerRadius(10)
-                .padding(.horizontal, 24)
-        }
-        .disabled(tagInfoList.first { $0.isPressProfile == true } == nil)
-        
-        
-
-        
-        
+        .padding(.horizontal, 27)
     }
 }
 

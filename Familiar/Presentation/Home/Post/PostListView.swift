@@ -20,26 +20,28 @@ struct PostListView: View {
     @State var great: Int = 7
     @State var comment: Int = 10
     @State var isShowMenu: Bool = false
+    @State var tags: [String] = ["나", "냥냥이", "멍뭉이"]
+    
+    @State private var tagsHeight = CGFloat.zero
     
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            VStack(spacing: 0) {
+            VStack(spacing: 12) {
                 HStack (spacing:0) {
-                    
                     Image(uiImage: userProfileImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(width:40, height: 40)
-                        .cornerRadius(20)
+                        .frame(width:28, height: 28)
+                        .cornerRadius(14)
                     
                     Text(userNickName)
-                        .font(.system(size: 20))
+                        .font(Font.custom("pretendard", size: 16))
                         .padding(.leading, 16)
                     
                     Text(createdTime)
-                        .font(.system(size: 18))
-                        .padding(.leading, 10)
+                        .font(Font.custom("pretendard", size: 14))
+                        .padding(.leading, 8)
                         .foregroundColor(Constants.Colors.grayScale500)
                     
                     Spacer()
@@ -63,15 +65,26 @@ struct PostListView: View {
                         Image("showMore")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 25, height: 25)
+                            .frame(width: 24, height: 24)
                     }
                 } // : HStack
                 
+                VStack(spacing: 6){
                 // 게시글 내용
                 Text("제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.")
                     .lineLimit(5)
                     .multilineTextAlignment(.leading)
-                    .padding(.top, 14)
+//                    .padding(.top, 14)
+                    
+                    // tags
+                    VStack {
+                        GeometryReader { geometry in
+                            self.generateTags(in: geometry)
+                        }
+                    }
+                    .frame(height: tagsHeight)
+                }
+
                 
                 // 좋아요 버튼
                 HStack {
@@ -83,7 +96,7 @@ struct PostListView: View {
                         Image(pressGreatButton ? "great.fill" : "great")
                             .resizable()
                             .scaledToFill()
-                            .frame(width:25, height: 25)
+                            .frame(width:22, height: 22)
                     }
                     Text("\(great)")
                         .font(.system(size: 15))
@@ -92,7 +105,8 @@ struct PostListView: View {
                     
                     // 구분선 크기조절
                     Divider()
-                        .frame(height: 40)
+                        .frame(width: 1, height: 22)
+                        .background(Constants.Colors.grayScale400)
                     
                     // 댓글 버튼
                     
@@ -103,11 +117,11 @@ struct PostListView: View {
                         Image("coment")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 25, height: 25)
+                            .frame(width: 22, height: 22)
                     }
                     .sheet(isPresented: $pressComentButton) {
                         if #available(iOS 16.4, *) {
-                            ComentSheetView()
+                            ComentSheetView(userProfileImage: $userProfileImage)
                                 .presentationDetents([.medium])
                                 .presentationCornerRadius(25)
                         } else {
@@ -119,7 +133,8 @@ struct PostListView: View {
                         .foregroundColor(Constants.Colors.grayScale600)
                     Spacer()
                 }
-                .padding(.vertical, 10)
+                .padding(.top, 6)
+                .padding(.bottom, 14)
                 
                 Divider()
             }
@@ -134,30 +149,88 @@ struct PostListView: View {
                         isShowMenu = false
                     } label: {
                         Text("수정하기")
+                            .font(.custom("pretendard", size: 14))
                     }
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 14)
                     Constants.Colors.grayScale400
-                        .frame(width: 100, height: 1)
+                        .frame(width: 80, height: 1)
                     Button {
                         isShowMenu = false
                     } label: {
                         Text("삭제")
+                            .font(.custom("pretendard", size: 14))
                     }
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 14)
                 }
-                .frame(width: 100)
+                .frame(width: 80)
                 .background(.white)
                 .cornerRadius(5)
-                .foregroundColor(.black)
+                .foregroundColor(Constants.Colors.grayScale800)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Constants.Colors.grayScale400, lineWidth: 1)
+                        .stroke(Constants.Colors.grayScale200, lineWidth: 1)
                 )
                 .padding(.trailing, 10)
+                .shadow(color: Color(red: 56/255, green: 29/255, blue: 22/255).opacity(0.1),
+                        radius: 7, x: 0, y: 5)
             }
         }
         
     } // : body
+    
+    // 태그 정렬
+    func generateTags(in g: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+        
+        return ZStack(alignment: .topLeading) {
+            ForEach(tags, id: \.self) { tag in
+                item(for: tag)
+                    .padding(.trailing, 8)
+                    .alignmentGuide(.leading, computeValue: { d in
+                        if (abs(width - d.width) > g.size.width)
+                        {
+                            width = 0
+                            height -= d.height
+                        }
+                        let result = width
+                        if tag == self.tags.last! {
+                            width = 0
+                        } else {
+                            width -= d.width
+                        }
+                        return result
+                    })
+                    .alignmentGuide(.top, computeValue: {d in
+                        let result = height
+                        if tag == self.tags.last! {
+                            height = 0
+                        }
+                        return result
+                    })
+            }
+        }
+        .background(viewHeightReader($tagsHeight))
+    }
+    
+    
+    // 태그 문자열을 뷰로 변환
+    func item(for tag: String) -> some View {
+        Text("@\(tag)")
+            .font(.system(size: 14))
+            .foregroundColor(Constants.Colors.grayScale500)
+    }
+    
+    // 뷰 높이 계산
+    func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+        return GeometryReader { geometry -> Color in
+            let rect = geometry.frame(in: .local)
+            DispatchQueue.main.async {
+                binding.wrappedValue = rect.size.height
+            }
+            return .clear
+        }
+    }
 }
 
 #Preview {

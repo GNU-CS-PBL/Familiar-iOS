@@ -27,32 +27,36 @@ struct AlarmListView: View {
         VStack {
             HStack(alignment: .center, spacing: 0) {
                 Image("bell")
-                    .padding(.leading, 24)
+                    .resizable()
+                    .frame(width: 28, height: 28)
                 
                 Text(alarmType)
-                    .font(.title3)
+                    .font(.custom("pretendard", size: 14))
                     .padding(.leading, 11)
                 
                 Spacer()
                 
                 Text("\(alarmTime)시간 전")
-                    .foregroundColor(Constants.Colors.grayScale500)
-                    .padding(.trailing, 24)
-                    .padding(.top, 16)
+                    .foregroundColor(Constants.Colors.grayScale400)
+                    .font(Font.custom("pretendard", size: 14))
+//                    .padding(.trailing, 24)
+//                    .padding(.top, 16)
                 
                 
             } // : HStack
             
+            .padding(.bottom, 4)
+
+            
             Text(alarmText)
-                .font(.body)
+                .font(.custom("pretendard", size: 14))
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 68)
-                .padding(.trailing, 24)
-                .padding(.bottom, 16)
+                .padding(.leading, 44)
         }
-        .padding(.vertical, 15)
-        .background(isSelected ? .white : Constants.Colors.main100)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 24)
+        .background(isSelected ? .white : Constants.Colors.main50)
         
         
         

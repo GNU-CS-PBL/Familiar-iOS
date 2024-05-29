@@ -28,6 +28,8 @@ struct HomeView: View {
                     }
                 }
                 plusBotton
+
+
             }
         }
     }
@@ -49,7 +51,9 @@ extension HomeView {
                 }
               
             }
-        .padding(.trailing)
+            .padding(.trailing, 16)
+            .padding(.vertical, 11)
+            .padding(.bottom, 4)
     }
     
     private var title: some View {
@@ -81,16 +85,21 @@ extension HomeView {
                 Spacer()
             }
         }
-        .padding(.leading)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 20)
     }
     
     private var advertisement: some View {
-        Text("광고")
-            .frame(width: 300, height: 140)
+        HStack {
+            Spacer()
+            Text("광고")
+            Spacer()
+        }
+            .frame(height: 118)
             .background(Constants.Colors.grayScale200)
             .cornerRadius(16)
-            .padding(.top, 25)
-            .padding(.bottom, 15)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 16)
     }
     
     private var post : some View {
@@ -108,18 +117,18 @@ extension HomeView {
             pressPlusButton.toggle()
             
         } label: {
-            Image(systemName: "plus")
+            Image("plus")
                 .resizable()
-                .frame(width: 40, height: 40)
-                .padding()
+                .frame(width: 48, height: 48)
             
         }
         
+        .frame(width: 64, height: 64)
         .background(Color(.white))
         .foregroundColor(Constants.Colors.main400)
         .clipShape(Circle())
         .padding()
-        .shadow(color: Color.black.opacity(0.4), radius: 5, x: 0, y: 5)
+        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 2)
         .fullScreenCover(isPresented: $pressPlusButton) {
             WritePostView(userProfileImage: .constant(UIImage(named: "cat")!))
         }

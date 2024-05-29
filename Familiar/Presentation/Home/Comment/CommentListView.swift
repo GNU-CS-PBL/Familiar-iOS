@@ -21,27 +21,27 @@ struct ComentListView: View {
                     Image(uiImage: userProfileImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(30)
+                        .frame(width: 48, height: 48)
+                        .cornerRadius(24)
                        
                     
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(alignment: .center, spacing: 0) {
                             Text(userNickName)
-                                .font(.system(size: 20, weight: .medium))
+                                .font(.system(size: 16, weight: .medium))
                             Text("7시간 전")
-                                .font(.system(size: 18))
-                                .foregroundColor(Constants.Colors.grayScale500)
+                                .font(Font.custom("pretendard", size: 16))
+                                .foregroundColor(Constants.Colors.grayScale400)
                                 .padding(.leading, 8)
                         }
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 8)
                         
                         Text("댓글입니다.")
-                            .font(.system(size: 18))
-                            .frame(width: .infinity, alignment: .leading)
+                            .font(Font.custom("pretendard", size: 16))
+                            .padding(.bottom, 12)
                     }
-                    .padding(.leading, 24)
-                    .padding(.top, 8)
+                    .padding(.leading, 22)
+                  
                     
                     Spacer()
                     
@@ -58,7 +58,7 @@ struct ComentListView: View {
 //                    }
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 24)
             .padding(.vertical, 10)
             if isShowMenu {
                 VStack(spacing: 0) {
@@ -66,6 +66,7 @@ struct ComentListView: View {
                         isShowMenu = false
                     } label: {
                         Text("수정하기")
+                            .font(Font.custom("pretendard", size: 14))
                     }
                     .padding(.vertical, 8)
                     Constants.Colors.grayScale400
@@ -74,6 +75,7 @@ struct ComentListView: View {
                         isShowMenu = false
                     } label: {
                         Text("삭제")
+                            .font(Font.custom("pretendard", size: 14))
                     }
                     .padding(.vertical, 8)
                 }
