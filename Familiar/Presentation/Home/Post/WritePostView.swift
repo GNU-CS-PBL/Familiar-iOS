@@ -12,6 +12,7 @@ struct WritePostView: View {
     @State var tagInfo: [TagInfo] = []
     @State private var totalHeight = CGFloat.zero
     
+    
     var body: some View {
         
         ScrollView {
@@ -22,7 +23,6 @@ struct WritePostView: View {
                     } label: {
                         Text("취소")
                             .font(Font.custom("pretendard", size: 16).weight(.semibold))
-//                            .font(.system(size: 16, weight: .medium))
                         
                             .foregroundColor(Constants.Colors.grayScale800)
                         //                            .padding(.leading,24)
@@ -34,7 +34,6 @@ struct WritePostView: View {
                         
                     } label: {
                         Text("등록")
-//                            .font(.system(size: 16, weight: .semibold))
                             .font(Font.custom("pretendard", size: 16).weight(.semibold))
                             .foregroundColor(feedWriteZone == "" ? Constants.Colors.grayScale500 : Constants.Colors.main400)
                     }
@@ -67,8 +66,13 @@ struct WritePostView: View {
                         .padding(.leading, 10)
                         .frame(minHeight: 400)
                         .font(Font.custom("pretendard", size: 18))
+                        .overlay(
+                                                    RoundedRectangle(cornerRadius: 16)
+                                                        .stroke(Constants.Colors.grayScale400, lineWidth: 1)
+                                                )
 //                        .background(Constants.Colors.grayScale200)
-                        .cornerRadius(4)
+
+                        .cornerRadius(16)
                     
                     if feedWriteZone.isEmpty {
                         Text(placeholder)
@@ -97,7 +101,7 @@ struct WritePostView: View {
                         Spacer()
                     }
                     .frame(height: 62)
-                    .background(Constants.Colors.grayScale200)
+                    .background(Constants.Colors.grayScale100)
                     .cornerRadius(8)
                 }
                 } else {
@@ -186,7 +190,7 @@ struct WritePostView: View {
                         VStack {
                             GeometryReader { geometry in
                                 self.generateContent(in: geometry, totalHeight: $totalHeight)
-
+                               
                             }
                         }
                         .frame(height: totalHeight)
@@ -196,20 +200,24 @@ struct WritePostView: View {
             } // : VStack
             .padding(.horizontal, 24)
             .photoPicker(isPresented: $showPhotoPicker, selection: $images)
-//                        .sheet(isPresented: $pressAddTagButton, content: {
-//                            TagSheetView(tagInfo: $tagInfo)
-//                                .presentationDetents([.medium])
-//                                .presentationCornerRadius(25)
-//                        })
+                        .sheet(isPresented: $pressAddTagButton, content: {
+                            TagSheetView(tagInfo: $tagInfo)
+                                .presentationDetents([.medium])
+                                .presentationCornerRadius(25)
+                        })
             
-            .fullScreenCover(isPresented: $pressAddTagButton) {
-                TagSheetView(tagInfo: $tagInfo)
-                    .cornerRadius(25) 
-            }
-
+//            .fullScreenCover(isPresented: $pressAddTagButton) {
+//                TagSheetView(tagInfo: $tagInfo)
+//                    .cornerRadius(25) 
+//            }
         }
         
+        
     }
+  
+    
+
+    
 func generateContent(in g: GeometryProxy, totalHeight: Binding<CGFloat>) -> some View {
     var width = CGFloat.zero
     var height = CGFloat.zero

@@ -95,7 +95,7 @@ struct TagSheetView: View {
                 tagInfo = tagInfoList.filter { $0.isPressProfile == true }
                 presentationMode.wrappedValue.dismiss()
             } label: {
-                Text("완료")
+                Text("완 료")
 //                    .font(.headline).bold()
                     .font(Font.custom("pretendard", size: 16).weight(.semibold))
                     .padding()
