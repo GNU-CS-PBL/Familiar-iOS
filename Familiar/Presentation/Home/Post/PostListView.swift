@@ -138,8 +138,8 @@ struct PostListView: View {
                 
                 Divider()
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 10)
+//            .padding(.horizontal, 20)
+//            .padding(.top, 10)
             .onTapGesture {
                 self.isShowMenu = false
             }
