@@ -17,49 +17,88 @@ struct StdMyComment {
 
 extension StdMyComment: View {
     var body: some View {
-        HStack(spacing: 0) {
-            profileImage
-                .padding(.trailing, 16)
-            commentBody
-                .padding(.trailing, 4)
-            Spacer()
-            commentMenu
+        ZStack(alignment: .topTrailing) {
+            HStack(spacing: 0) {
+                profileImage
+                    .padding(.trailing, 16)
+                commentBody
+                    .padding(.trailing, 4)
+                Spacer()
+                commentMenu
+            }
+            .frame(maxWidth: .infinity, maxHeight: 118)
+            
+            // 외부영역 클릭 시 메뉴 닫기
+            .onReceive(NotificationCenter.default.publisher(for: .viewTapNotification)) { _ in
+                isShowMenu = false
+            }
+            
+            if(isShowMenu) {
+                VStack(spacing: 0) {
+                    Button {
+                        isShowMenu = false
+                    } label: {
+                        Text("수정하기")
+                            .font(.custom("pretendard", size: 14))
+                    }
+                    .padding(.vertical, 14)
+                    Constants.Colors.grayScale400
+                        .frame(width: 80, height: 1)
+                    Button {
+                        isShowMenu = false
+                    } label: {
+                        Text("삭제")
+                            .font(.custom("pretendard", size: 14))
+                    }
+                    .padding(.vertical, 16)
+                }
+                .frame(width: 80)
+                .background(.white)
+                .cornerRadius(5)
+                .foregroundColor(Constants.Colors.grayScale800)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Constants.Colors.grayScale200, lineWidth: 1)
+                )
+                .padding(.trailing, 10)
+                .shadow(color: Color(red: 56/255, green: 29/255, blue: 22/255).opacity(0.1),
+                        radius: 7, x: 0, y: 5)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: 118)
-//        .onTapGesture {
-//            self.isShowMenu = false
-//        }
-//        if(isShowMenu) {
-//            VStack(spacing: 0) {
-//                Button {
-//                    isShowMenu = false
-//                } label: {
-//                    Text("수정하기")
-//                        .font(.custom("pretendard", size: 14))
-//                }
-//                .padding(.vertical, 14)
-//                Constants.Colors.grayScale400
-//                    .frame(width: 80, height: 1)
-//                Button {
-//                    isShowMenu = false
-//                } label: {
-//                    Text("삭제")
-//                        .font(.custom("pretendard", size: 14))
-//                }
-//                .padding(.vertical, 14)
-//            }
-//            .frame(width: 80)
-//            .background(.white)
-//            .cornerRadius(5)
-//            .foregroundColor(Constants.Colors.grayScale800)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 5)
-//                    .stroke(Constants.Colors.grayScale200, lineWidth: 1)
-//            )
-//            .padding(.trailing, 10)
-//            .shadow(color: Color(red: 56/255, green: 29/255, blue: 22/255).opacity(0.1),
-//                    radius: 7, x: 0, y: 5)
-//        }
+        //        .onTapGesture {
+        //            self.isShowMenu = false
+        //        }
+        //        if(isShowMenu) {
+        //            VStack(spacing: 0) {
+        //                Button {
+        //                    isShowMenu = false
+        //                } label: {
+        //                    Text("수정하기")
+        //                        .font(.custom("pretendard", size: 14))
+        //                }
+        //                .padding(.vertical, 14)
+        //                Constants.Colors.grayScale400
+        //                    .frame(width: 80, height: 1)
+        //                Button {
+        //                    isShowMenu = false
+        //                } label: {
+        //                    Text("삭제")
+        //                        .font(.custom("pretendard", size: 14))
+        //                }
+        //                .padding(.vertical, 14)
+        //            }
+        //            .frame(width: 80)
+        //            .background(.white)
+        //            .cornerRadius(5)
+        //            .foregroundColor(Constants.Colors.grayScale800)
+        //            .overlay(
+        //                RoundedRectangle(cornerRadius: 5)
+        //                    .stroke(Constants.Colors.grayScale200, lineWidth: 1)
+        //            )
+        //            .padding(.trailing, 10)
+        //            .shadow(color: Color(red: 56/255, green: 29/255, blue: 22/255).opacity(0.1),
+        //                    radius: 7, x: 0, y: 5)
+        //        }
     }
 }
 

@@ -174,7 +174,7 @@ struct Constants {
         var image: String
         
         var body: some View {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 HStack(alignment: .center, spacing: 0) {
                     Image(image)
                         .resizable()
@@ -195,20 +195,23 @@ struct Constants {
                 
                 
                 HStack(alignment: .center, spacing: 0) {
-                    Image("pencil")
+                    Image(systemName: "pencil")
+                        .fontWeight(.bold)
                         .frame(width: 18, height: 18)
+                        .foregroundColor(.white)
                 }
                 
                 .padding(7)
                 .frame(width: 32, height: 32, alignment: .center)
                 .background(Constants.Colors.main300)
-                .cornerRadius(36)
+                .clipped()
+                .clipShape(Circle())
                 .overlay(
                     RoundedRectangle(cornerRadius: 36)
                         .inset(by: 1)
                         .stroke(.white, lineWidth: 2)
                 )
-                .offset(x: 30,y: 30)
+//                .offset(x: 30,y: 30)
             }
         }
     }

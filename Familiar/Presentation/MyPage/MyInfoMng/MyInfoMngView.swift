@@ -46,30 +46,37 @@ extension MyInfoMngView {
             Button(action: {
                 self.showingSheet = true
             }) {
-                if let displayImage = image {
-                    Image(uiImage: displayImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 90, height: 90)
+                ZStack(alignment: .bottomTrailing) {
+                    if let displayImage = image {
+                        Image(uiImage: displayImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 90, height: 90)
+                            .clipped()
+                            .clipShape(Circle())
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 45)
+                                    .stroke(.main100, lineWidth: 1)
+                            )
+                        HStack(alignment: .center, spacing: 0) {
+                            Image(systemName: "pencil")
+                                .fontWeight(.bold)
+                                .frame(width: 18, height: 18)
+                                .foregroundColor(.white)
+                        }
+                        .padding(7)
+                        .frame(width: 32, height: 32, alignment: .center)
+                        .background(Color.main300)
                         .clipped()
                         .clipShape(Circle())
-                    HStack(alignment: .center, spacing: 0) {
-                        Image("pencil")
-                            .frame(width: 18, height: 18)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 36)
+                                .inset(by: 1)
+                                .stroke(.white, lineWidth: 2)
+                        )
+                    } else {
+                        Constants.ProfileButton(image: "profile-default")
                     }
-                    
-                    .padding(7)
-                    .frame(width: 32, height: 32, alignment: .center)
-                    .background(Color.main300)
-                    .cornerRadius(36)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 36)
-                            .inset(by: 1)
-                            .stroke(.white, lineWidth: 2)
-                    )
-                    .offset(x: -30,y: 30)
-                } else {
-                    Constants.ProfileButton(image: "profile-default")
                 }
             }
             .confirmationDialog("타이틀", isPresented: $showingSheet) {
@@ -82,10 +89,11 @@ extension MyInfoMngView {
                 
                 Button("취소", role: .cancel) {}
             }.sheet(isPresented: $showCamera) {
-//                CameraView(image: $image)
+                CameraView(selection: $image)
+                    .background(.black)
             }
             .sheet(isPresented: $showImagePicker) {
-//                  PhotoPicker(image: $image)
+                PhotoPicker(selection: $image)
             }
         }
     }
