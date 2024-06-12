@@ -2,28 +2,28 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-
-    var singleSelection: Binding<UIImage>?
+    
+    var singleSelection: Binding<UIImage?>?
     var multipleSelection: Binding<[UIImage]>?
-
-    var isErrorAlertPresented: Binding<Bool>
-
-    init(selection: Binding<UIImage>, isErrorAlertPresented: Binding<Bool>) {
+    
+    var isErrorAlertPresented: Binding<Bool>?
+    
+    init(selection: Binding<UIImage?>, isErrorAlertPresented: Binding<Bool>? = nil) {
         self.singleSelection = selection
         self.multipleSelection = nil
         self.isErrorAlertPresented = isErrorAlertPresented
     }
-
-    init(selection: Binding<[UIImage]>, isErrorAlertPresented: Binding<Bool>) {
+    
+    init(selection: Binding<[UIImage]>, isErrorAlertPresented: Binding<Bool>? = nil) {
         self.singleSelection = nil
         self.multipleSelection = selection
         self.isErrorAlertPresented = isErrorAlertPresented
     }
-
+    
     func makeCoordinator() -> PhotoPickerCoordinator {
         PhotoPickerCoordinator(self)
     }
-
+    
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = singleSelection == nil ? 4 : 1
@@ -32,7 +32,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
         photoPickerViewController.delegate = context.coordinator
         return photoPickerViewController
     }
-
+    
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) { }
-
+    
 }

@@ -65,47 +65,47 @@ extension MyPageView: View {
                 .padding(.bottom, 24)
         }
         .padding(.top, 58)
-        .alert(isPresented: $showAdminErrorAlert) {
-            Alert(
-                title: Text("탈퇴 오류")
-                    .font(.custom("Pretendard", size: 20))
-                    .foregroundColor(.red),
-                message: Text("방장 권한이 남아 있어 탈퇴가 불가능합니다.\n권한을 위임하고 다시 시도해주세요."),
-                dismissButton: .default(Text("확인"))
-            )
-        }
-        .alert(isPresented: $showLeaveConfirmation) {
-            Alert(
-                title: Text("방 퇴장하기")
-                    .font(.custom("Pretendard", size: 20))
-                    .foregroundColor(.red),
-                message: Text("정말 방을 탈퇴하시겠습니까?"),
-                primaryButton: .default(Text("네"), action: {
-                    leaveStatus = .success
-                }),
-                secondaryButton: .cancel(Text("아니요"))
-            )
-        }
-        .alert(item: $leaveStatus) { status in
-            switch status {
-            case .success:
-                return Alert(
-                    title: Text("탈퇴 성공")
-                        .font(.custom("Pretendard", size: 20))
-                        .foregroundColor(.red),
-                    message: Text("성공적으로 탈퇴가 되었습니다."),
-                    dismissButton: .default(Text("확인"))
-                )
-            case .failure:
-                return Alert(
-                    title: Text("탈퇴 오류")
-                        .font(.custom("Pretendard", size: 20))
-                        .foregroundColor(.red),
-                    message: Text("문제가 생겨 탈퇴가 성공적으로 진행되지 못하였습니다."),
-                    dismissButton: .default(Text("확인"))
-                )
-            }
-        }
+//        .alert(isPresented: $showAdminErrorAlert) {
+//            Alert(
+//                title: Text("탈퇴 오류")
+//                    .font(.custom("Pretendard", size: 20))
+//                    .foregroundColor(.red),
+//                message: Text("방장 권한이 남아 있어 탈퇴가 불가능합니다.\n권한을 위임하고 다시 시도해주세요."),
+//                dismissButton: .default(Text("확인"))
+//            )
+//        }
+//        .alert(isPresented: $showLeaveConfirmation) {
+//            Alert(
+//                title: Text("방 퇴장하기")
+//                    .font(.custom("Pretendard", size: 20))
+//                    .foregroundColor(.red),
+//                message: Text("정말 방을 탈퇴하시겠습니까?"),
+//                primaryButton: .default(Text("네"), action: {
+//                    leaveStatus = .success
+//                }),
+//                secondaryButton: .cancel(Text("아니요"))
+//            )
+//        }
+//        .alert(item: $leaveStatus) { status in
+//            switch status {
+//            case .success:
+//                return Alert(
+//                    title: Text("탈퇴 성공")
+//                        .font(.custom("Pretendard", size: 20))
+//                        .foregroundColor(.red),
+//                    message: Text("성공적으로 탈퇴가 되었습니다."),
+//                    dismissButton: .default(Text("확인"))
+//                )
+//            case .failure:
+//                return Alert(
+//                    title: Text("탈퇴 오류")
+//                        .font(.custom("Pretendard", size: 20))
+//                        .foregroundColor(.red),
+//                    message: Text("문제가 생겨 탈퇴가 성공적으로 진행되지 못하였습니다."),
+//                    dismissButton: .default(Text("확인"))
+//                )
+//            }
+//        }
     }
 }
 
@@ -158,12 +158,51 @@ extension MyPageView {
                 Image("chevron-forward")
                     .frame(width: 20, height: 20)
             }
+            
             .padding(16)
             .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
             .background(Color.white)
         }
         .overlay(Rectangle().stroke(Constants.Colors.grayScale50, lineWidth: 1))
+        
+        
+        
+//        .alert(isPresented: $showLeaveConfirmation) {
+//              Alert(
+//                  title: Text("방 퇴장하기")
+//                    .foregroundColor(.red),
+//                  message: Text("정말 방을 퇴장하시겠습니까?"),
+//                  primaryButton: .destructive(Text("네")) {
+//                      leaveStatus = .success
+//                  },
+//                  secondaryButton: .cancel(Text("아니요"))
+//              )
+//            
+//            
+//        }
+        
+        .customAlertView(isPresented: $showLeaveConfirmation,
+                         title: "방 퇴장하기",
+                         titleColor: .error,
+                         description: "정말 방을 퇴장하시겠습니까?",
+                         primary: AlertAction(text: "네",
+                                              foregroundColor: .main400,
+                                              action: {
+          
+        }),
+        secondary: AlertAction(text: "아니오"))
+        .customAlertView(isPresented: $showLeaveConfirmation,
+                         title: "탈퇴 오류",
+                         titleColor: .error,
+                         description: "방장 권한이 남아 있어 탈퇴가 불가능합니다.\n권한을 위임하고 다시 시도해주세요.",
+                         primary: AlertAction(text: "확인",
+                                              foregroundColor: .main400,
+                                              action: {
+          
+        }))
     }
+    
+    
     
     private var appVersion: some View {
         HStack {

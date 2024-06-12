@@ -46,6 +46,7 @@ struct PostListView: View {
                     
                     Spacer()
                     
+                    
 //                    // 게시물 고정 버튼
 //                    Button {
 //                        pressPinButton.toggle()
@@ -69,6 +70,8 @@ struct PostListView: View {
                     }
                 } // : HStack
                 
+                .padding(.top, 16)
+
                 VStack(spacing: 6){
                 // 게시글 내용
                 Text("제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.")
@@ -134,15 +137,17 @@ struct PostListView: View {
                     Spacer()
                 }
                 .padding(.top, 6)
-                .padding(.bottom, 14)
+                .padding(.bottom, 16)
                 
                 Divider()
             }
 //            .padding(.horizontal, 20)
 //            .padding(.top, 10)
-            .onTapGesture {
-                self.isShowMenu = false
-            }
+            
+            // 외부영역 클릭시 메뉴 숨기기
+            .onReceive(NotificationCenter.default.publisher(for: .viewTapNotification)) { _ in
+                isShowMenu = false
+                }
             if(isShowMenu) {
                 VStack(spacing: 0) {
                     Button {
@@ -160,7 +165,7 @@ struct PostListView: View {
                         Text("삭제")
                             .font(.custom("pretendard", size: 14))
                     }
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 16)
                 }
                 .frame(width: 80)
                 .background(.white)
@@ -175,6 +180,8 @@ struct PostListView: View {
                         radius: 7, x: 0, y: 5)
             }
         }
+        
+        
         
     } // : body
     

@@ -61,6 +61,11 @@
 		B3FE187F2C17BDC200D4DD67 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE187E2C17BDC200D4DD67 /* CustomNavBarContainerView.swift */; };
 		B3FE18812C17BDEA00D4DD67 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE18802C17BDEA00D4DD67 /* CustomNavBarView.swift */; };
 		B3FE18832C17BE1100D4DD67 /* CustomNavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE18822C17BE1100D4DD67 /* CustomNavLink.swift */; };
+		D71888232C196D7F005B4413 /* NSNotification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71888222C196D7F005B4413 /* NSNotification.Name+.swift */; };
+		D71888252C196F80005B4413 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71888242C196F80005B4413 /* View+.swift */; };
+		D71888272C197012005B4413 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71888262C197012005B4413 /* AlertView.swift */; };
+		D71888292C197720005B4413 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71888282C197720005B4413 /* CameraView.swift */; };
+		D718882B2C19774A005B4413 /* CameraCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D718882A2C19774A005B4413 /* CameraCoordinator.swift */; };
 		D7D876272C073F55002359A0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D876262C073F55002359A0 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +127,11 @@
 		B3FE187E2C17BDC200D4DD67 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
 		B3FE18802C17BDEA00D4DD67 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		B3FE18822C17BE1100D4DD67 /* CustomNavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavLink.swift; sourceTree = "<group>"; };
+		D71888222C196D7F005B4413 /* NSNotification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+.swift"; sourceTree = "<group>"; };
+		D71888242C196F80005B4413 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		D71888262C197012005B4413 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		D71888282C197720005B4413 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		D718882A2C19774A005B4413 /* CameraCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCoordinator.swift; sourceTree = "<group>"; };
 		D7D876262C073F55002359A0 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		DE6927193E13E2BB8D569875 /* Pods_Familiar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Familiar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -247,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				B30EA03D2BF748AA003ED5F6 /* Extension.swift */,
+				D71888222C196D7F005B4413 /* NSNotification.Name+.swift */,
+				D71888242C196F80005B4413 /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -456,6 +468,8 @@
 				B36C90032BFA821F00EFBED5 /* PhotoPicker.swift */,
 				B36C90052BFA822E00EFBED5 /* PhotoPickerCoordinator.swift */,
 				B36C90072BFA824400EFBED5 /* PhotoPickerModifier.swift */,
+				D71888282C197720005B4413 /* CameraView.swift */,
+				D718882A2C19774A005B4413 /* CameraCoordinator.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -494,6 +508,7 @@
 				B3FE18682C17712300D4DD67 /* StdBirthField.swift */,
 				B3FE186A2C177F2B00D4DD67 /* StdTextField.swift */,
 				B3FE18722C179D8000D4DD67 /* StdMyComment.swift */,
+				D71888262C197012005B4413 /* AlertView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -659,6 +674,7 @@
 				B3FE18832C17BE1100D4DD67 /* CustomNavLink.swift in Sources */,
 				B36C8FF22BFA80A900EFBED5 /* CommentListView.swift in Sources */,
 				B3FE18642C1764B200D4DD67 /* EditNicknameView.swift in Sources */,
+				D71888252C196F80005B4413 /* View+.swift in Sources */,
 				B3FE18622C1764A500D4DD67 /* EditAliasView.swift in Sources */,
 				B36C8FFF2BFA81C700EFBED5 /* PhotoImageRow.swift in Sources */,
 				B3FE186F2C178D4300D4DD67 /* MyContentMngView.swift in Sources */,
@@ -668,12 +684,15 @@
 				B30EA0452BF7497E003ED5F6 /* MyPageView.swift in Sources */,
 				B3423BA82C0E404800BE5A79 /* MyPageMngElement.swift in Sources */,
 				B3FE187C2C17BC7D00D4DD67 /* LeaveStatus.swift in Sources */,
+				D71888292C197720005B4413 /* CameraView.swift in Sources */,
 				B3FE18732C179D8000D4DD67 /* StdMyComment.swift in Sources */,
+				D71888232C196D7F005B4413 /* NSNotification.Name+.swift in Sources */,
 				B3FE187F2C17BDC200D4DD67 /* CustomNavBarContainerView.swift in Sources */,
 				B30EA0472BF74A32003ED5F6 /* HomeView.swift in Sources */,
 				B36C8FF82BFA812F00EFBED5 /* AlarmView.swift in Sources */,
 				B36C900B2BFA82EA00EFBED5 /* TagSheetView.swift in Sources */,
 				D7D876272C073F55002359A0 /* SplashView.swift in Sources */,
+				D718882B2C19774A005B4413 /* CameraCoordinator.swift in Sources */,
 				B30EA03C2BF7488B003ED5F6 /* Constants.swift in Sources */,
 				B3FE187A2C17B96000D4DD67 /* MngUserElement.swift in Sources */,
 				B30EA04B2BF74A51003ED5F6 /* LoginView.swift in Sources */,
@@ -685,6 +704,7 @@
 				B36C8FF42BFA80C700EFBED5 /* WritePostView.swift in Sources */,
 				B36C90012BFA81DB00EFBED5 /* AddImageView.swift in Sources */,
 				B3FE18602C175AE200D4DD67 /* MyInfoMngView.swift in Sources */,
+				D71888272C197012005B4413 /* AlertView.swift in Sources */,
 				B36C90062BFA822E00EFBED5 /* PhotoPickerCoordinator.swift in Sources */,
 				B36C8FFA2BFA813D00EFBED5 /* AlarmListView.swift in Sources */,
 				B36C8FFD2BFA818400EFBED5 /* AlarmVM.swift in Sources */,

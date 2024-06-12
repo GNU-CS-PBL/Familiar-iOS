@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var pressBellButton : Bool = false
     @State var pressPlusButton : Bool = false
     
+    
     var body: some View {
         NavigationView {
             ZStack (alignment: .bottomTrailing) {
@@ -28,8 +29,14 @@ struct HomeView: View {
                     }
                 }
                 plusBotton
-
-
+            }
+            
+            .onTapGesture {
+                NotificationCenter.default.post(
+                    name: .viewTapNotification,
+                     object: nil,
+                     userInfo: nil
+                   )
             }
         }
     }

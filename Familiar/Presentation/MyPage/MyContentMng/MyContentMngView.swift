@@ -34,6 +34,14 @@ extension MyContentMngView: View {
             .padding(.top, 8)
             Spacer()
         }
+        
+        .onTapGesture {
+            NotificationCenter.default.post(
+                name: .viewTapNotification,
+                 object: nil,
+                 userInfo: nil
+               )
+        }
     }
 }
 
