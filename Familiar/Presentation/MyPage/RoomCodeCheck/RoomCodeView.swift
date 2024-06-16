@@ -16,12 +16,10 @@ struct RoomCodeView {
 // MARK: - View
 extension RoomCodeView: View {
     var body: some View {
-        VStack {
-            Spacer()
+        VStack(alignment: .center) {
             content
-            Spacer()
+                .padding(.bottom, 70)
         }
-        .ignoresSafeArea() // 완전한 중앙을 위해 safeArea 무시
         .background(Color.white)
     }
 }

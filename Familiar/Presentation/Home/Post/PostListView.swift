@@ -9,18 +9,25 @@ import SwiftUI
 
 struct PostListView: View {
     
+    var profileImage : UIImage
+    var userNickName : String
+    var createdTime: String
+    var content: String
+    var great: Int
+    var comment: Int
+    var tags: [String]
     @State var userProfileImage: UIImage = UIImage(named: "cat")!
-    @State var userNickName : String = "고먐미"
-    @State var createdTime: String = "7시간 전"
+//    @State var userNickName : String = "고먐미"
+//    @State var createdTime: String = "7시간 전"
     @State var pressPinButton : Bool = false
     @State var pressShowMoreButton : Bool = false
     @State var pressGreatButton : Bool = false
     @State var pressComentButton : Bool = false
     @State var resultActionSheet : String = ""
-    @State var great: Int = 7
-    @State var comment: Int = 10
+//    @State var great: Int = 7
+//    @State var comment: Int = 10
     @State var isShowMenu: Bool = false
-    @State var tags: [String] = ["나", "냥냥이", "멍뭉이"]
+//    @State var tags: [String] = ["나", "냥냥이", "멍뭉이"]
     
     @State private var tagsHeight = CGFloat.zero
     
@@ -74,11 +81,13 @@ struct PostListView: View {
 
                 VStack(spacing: 6){
                 // 게시글 내용
-                Text("제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다. 제한선은 5줄입니다.")
-                    .lineLimit(5)
-                    .multilineTextAlignment(.leading)
-//                    .padding(.top, 14)
-                    
+                    HStack {
+                        Text("\(content)")
+                            .lineLimit(5)
+                            .multilineTextAlignment(.leading)
+                        //                    .padding(.top, 14)
+                        Spacer()
+                    }
                     // tags
                     VStack {
                         GeometryReader { geometry in
@@ -94,7 +103,7 @@ struct PostListView: View {
                     Spacer()
                     Button {
                         pressGreatButton.toggle()
-                        self.great += pressGreatButton ? 1 : -1
+//                        great += pressGreatButton ? 1 : -1
                     } label: {
                         Image(pressGreatButton ? "great.fill" : "great")
                             .resizable()
@@ -180,6 +189,9 @@ struct PostListView: View {
                         radius: 7, x: 0, y: 5)
             }
         }
+        .onAppear {
+            userProfileImage = profileImage
+        }
         
         
         
@@ -240,6 +252,6 @@ struct PostListView: View {
     }
 }
 
-#Preview {
-    PostListView()
-}
+//#Preview {
+//    PostListView()
+//}

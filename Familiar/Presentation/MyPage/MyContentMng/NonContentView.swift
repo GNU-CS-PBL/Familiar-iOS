@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct StoreNonReviewView {
+struct NonContentView {
     var title: String
 }
 
-extension StoreNonReviewView: View {
+extension NonContentView: View {
     var body: some View {
         VStack(alignment: .center,spacing: 8) {
             
@@ -27,12 +27,13 @@ extension StoreNonReviewView: View {
               .foregroundColor(.grayScale500)
               .frame(maxWidth: .infinity, alignment: .top)
         }
-        .padding(.vertical, 80)
+//        .padding(.vertical, 80)
+        .frame(minHeight: 400)
         
         .background(Color.grayScale50)
     }
 }
 
 #Preview {
-    StoreNonReviewView(title: "게시물")
+    NonContentView(title: "게시물")
 }

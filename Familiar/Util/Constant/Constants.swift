@@ -10,6 +10,11 @@ import SwiftUI
 /// Constants - 공통으로 사용되는 상수 값 관리
 struct Constants {
     // MARK: - padding
+    enum Paddings {
+            static let regTop: CGFloat = 72
+            static let regBottom: CGFloat = 24
+            static let regHorizontal: CGFloat = 24
+    }
     
     // MARK: - Font
     
@@ -91,7 +96,7 @@ struct Constants {
                     .frame(height: 0.5)
                     .offset(y: 18)
             )
-            .frame(width: 335)
+//            .frame(width: 335)
             .accentColor(Constants.Colors.main300)
 //            .onChange(of: text) { oldValue, newValue in
 //                if newValue.count > maxTextLength && maxTextLength != 0 {
@@ -178,12 +183,9 @@ struct Constants {
                 HStack(alignment: .center, spacing: 0) {
                     Image(image)
                         .resizable()
-                        .frame(width: 78.75, height: 78.75)
+                        .frame(width: 90, height: 90)
                         .zIndex(1)
                 }
-                .padding(.horizontal, 5.625)
-                .padding(.top, 16.875)
-                .padding(.bottom, 0)
                 .frame(width: 90, alignment: .center)
                 .background(Constants.Colors.main100)
                 .cornerRadius(100)

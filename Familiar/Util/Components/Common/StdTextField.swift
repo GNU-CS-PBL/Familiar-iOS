@@ -26,6 +26,7 @@ struct StdTextField: View {
             }
             .font(Font.custom("Pretendard-Regular", size: 18))
             .foregroundColor(Color.grayScale900)
+            .textInputAutocapitalization(.never)
             
             Spacer()
             

@@ -2,9 +2,9 @@ import SwiftUI
 
 // MARK: - State
 struct MyPageView {
-    @State var nickname = "테스터"
-    @State var profilename = "진짜이룸"
-    @State var isAdmin = false
+    @State var nickname = "막내"
+    @State var profilename = "유준호"
+    @State var isAdmin = true
     @State private var showLeaveConfirmation = false
     @State private var showAdminErrorAlert = false
     @State private var leaveStatus: LeaveStatus? = nil
@@ -117,12 +117,9 @@ extension MyPageView {
                 HStack(alignment: .center, spacing: 0) {
                     Image("profile-default")
                         .resizable()
-                        .frame(width: 42.75, height: 42.75)
+                        .frame(width: 54, height: 54)
                         .zIndex(1)
                 }
-                .padding(.horizontal, 5.625)
-                .padding(.horizontal, 3.375)
-                .padding(.top, 10.125)
                 .padding(.bottom, 0)
                 .frame(width: 54, alignment: .center)
                 .background(Constants.Colors.main100)

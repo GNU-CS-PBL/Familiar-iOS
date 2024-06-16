@@ -105,12 +105,12 @@ extension MyContentMngView {
         VStack(spacing: 0) {
             if contentNum > 0 {
                 ForEach(1...contentNum, id: \.self) { count in
-                    PostListView()
+//                    PostListView()
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
             } else {
-                StoreNonReviewView(title: contentTab)
+                NonContentView(title: contentTab)
             }
         }
     }
@@ -130,7 +130,7 @@ extension MyContentMngView {
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
             } else {
-                StoreNonReviewView(title: contentTab)
+                NonContentView(title: contentTab)
             }
         }
     }

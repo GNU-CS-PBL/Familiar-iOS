@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var nickname = "테스터"
-    @State var roomname = "테테"
+    @State var nickname = "막내"
+    @State var roomname = "우리가좍"
     @State var pressBellButton : Bool = false
     @State var pressPlusButton : Bool = false
+    
+    @State var contentTab: String = "게시물"
     
     
     var body: some View {
@@ -44,8 +46,6 @@ struct HomeView: View {
 
 extension HomeView {
     private var alarm: some View {
-        
-      
             HStack{
                 Spacer()
                 NavigationLink {
@@ -68,26 +68,26 @@ extension HomeView {
             HStack {
                 Text(nickname)
                     .font(
-                        Font.custom("pretendard", size: 24)
+                        Font.custom("pretendard-Medium", size: 24)
                     )
                     .foregroundColor(Constants.Colors.main200)
                     .padding(.trailing, 2)
                 Text("님의,")
                     .font(
-                        Font.custom("pretendard", size: 24)
+                        Font.custom("pretendard-Medium", size: 24)
                     )
                 Spacer()
             }
             HStack {
                 Text(roomname)
                     .font(
-                        Font.custom("pretendard", size: 24)
+                        Font.custom("pretendard-Medium", size: 24)
                     )
                     .foregroundColor(Constants.Colors.main300)
                     .padding(.trailing, 2)
                 Text("하우스")
                     .font(
-                        Font.custom("pretendard", size: 24)
+                        Font.custom("pretendard-Medium", size: 24)
                     )
                 Spacer()
             }
@@ -98,22 +98,22 @@ extension HomeView {
     
     private var advertisement: some View {
         HStack {
-            Spacer()
-            Text("광고")
-            Spacer()
+            AdView()
         }
             .frame(height: 118)
             .background(Constants.Colors.grayScale200)
-            .cornerRadius(16)
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
     }
     
     private var post : some View {
         LazyVStack {
-            ForEach(1...10, id: \.self) { count in
-                PostListView()
-            }
+            PostListView(profileImage: UIImage(named: "cat")!, userNickName: "막내", createdTime: "2시간전", content: "시간 있을 때 또 한번\n가족여행 다녀오면 좋을 것 같아\n어떤 여행지가 좋을까!?", great: 3, comment: 8, tags: ["엄마","아빠","누나"])
+                .padding(.horizontal, 16)
+            PostImageView(profileImage: UIImage(named: "profile-test")!, userNickName: "아빠", createdTime: "6시간전", content: "저번 가족여행 사진이야", great: 4, comment: 2, tags: ["엄마","아빠","누나"])
+//            ForEach(1...10, id: \.self) { count in
+//                PostListView()
+//            }
         }
     }
     

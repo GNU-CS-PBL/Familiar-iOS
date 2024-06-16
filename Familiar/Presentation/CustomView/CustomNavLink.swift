@@ -28,26 +28,28 @@ struct CustomNavLink<Label: View, Destination: View>: View {
     }
     
     var body: some View {
-            if let isActive = isActive {
-                NavigationLink(destination: CustomNavBarContainerView {
+        if let isActive = isActive {
+            NavigationLink(
+                destination: CustomNavBarContainerView {
                     destination
                         .navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true)
-                }, isActive: Binding(get: { isActive == true }, set: { self.isActive = $0 ? true : nil })) {
-                    label
-                }
-            } else {
-                NavigationLink(destination: CustomNavBarContainerView {
-                    destination
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true)
-                }) {
-                    label
-                }
+                },
+                isActive: Binding(get: { isActive == true }, set: { self.isActive = $0 ? true : nil })
+            ) {
+                label
             }
-            
-        
-     
+        } else {
+            NavigationLink(
+                destination: CustomNavBarContainerView {
+                    destination
+                        .navigationBarHidden(true)
+                        .navigationBarBackButtonHidden(true)
+                }
+            ) {
+                label
+            }
+        }
     }
 }
 
